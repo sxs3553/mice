@@ -9,9 +9,6 @@ int main (int argc, char *argv[])
   // Instance a Window
   Mainwin win;
 
-  // Set the window title
-  win.set_title("Mav's Ice Cream Emporium");
-
   //Show the window and returns when it is closed or hidden
   return app->run(win);
 }

@@ -33,7 +33,7 @@ test: $(TOBJECTS)
 	$(CXX) $(CXXFLAGS) $^ -o $@ $(INCLUDE)
 
 debug: CXXFLAGS+= -g
-debug: div clean $(EXECUTABLE)
+debug: div $(EXECUTABLE)
 
 %.o: %.cpp *.h
 	$(CXX) $(CXXFLAGS) $(INCLUDE) -c $< -o $@

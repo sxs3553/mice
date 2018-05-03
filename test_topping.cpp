@@ -50,6 +50,44 @@ bool test_topping() {
     passed = false;
   }
 
+  // Test I/O
+  std::ostringstream ost;
+  topping.save(ost);
+
+  std::istringstream ist{ost.str()};
+  std::string header1, header2;
+  getline(ist, header1);
+  getline(ist, header2);
+  if (header1 != "#" && header2 != "TOPPING") {
+      std::cerr << "#### Container I/O fail" << std::endl;
+      std::cerr << "Expected header: '#' and 'TOPPING'" << std::endl;
+      std::cerr << "Actual header: '" << header1 << "' and '" << header2 << "'" << std::endl;
+  }
+
+  Mice::Topping clone{ist};
+
+  if (topping.name() != clone.name() ||
+      topping.description() != clone.description() ||
+      topping.cost() != clone.cost() ||
+      topping.price() != clone.price() ||
+      topping.type() != clone.type() ||
+      topping.amount() != clone.amount()) {
+    std::cerr << "#### Topping constructor fail" << std::endl;
+    std::cerr << "Expected: " << topping.name() << ','
+                              << topping.description() << ','
+                              << topping.cost() << ','
+                              << topping.price() << ','
+                              << topping.type() << ','
+                              << topping.amount() << std::endl;
+    std::cerr << "Actual:   " << clone.name() << ','
+                              << clone.description() << ','
+                              << clone.cost() << ','
+                              << clone.price() << ','
+                              << clone.type() << ','
+                              << clone.amount() << std::endl;
+    passed = false;
+  }
+
   //
   // Report results
   //

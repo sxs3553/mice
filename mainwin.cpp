@@ -32,19 +32,31 @@ Mainwin::Mainwin() {
 
     //         N E W   E M P O R I U M
     // (Owner) “Create a New Emporium” Append New to the File menu
-    Gtk::MenuItem *menuitem_new = Gtk::manage(new Gtk::MenuItem("_New Emporium", true));
-    //menuitem_new->signal_activate().connect(sigc::mem_fun(*this, &Mainwin::on_new_game_click));
+    menuitem_new = Gtk::manage(new Gtk::MenuItem("_New Emporium", true));
+    // menuitem_new->signal_activate().connect(sigc::mem_fun(*this, &Mainwin::on_file_new_click));
     filemenu->append(*menuitem_new);
+
+    //         O P E N   E M P O R I U M
+    // (Owner) “Open an Emporium File” Append Open to the File menu
+    menuitem_open = Gtk::manage(new Gtk::MenuItem("_Open", true));
+    menuitem_open->signal_activate().connect(sigc::mem_fun(*this, &Mainwin::on_file_open_click));
+    filemenu->append(*menuitem_open);
+
+    //         S A V E   E M P O R I U M
+    // (Owner) “Save an Emporium File” Append Save to the File menu
+    menuitem_save = Gtk::manage(new Gtk::MenuItem("_Save", true));
+    menuitem_save->signal_activate().connect(sigc::mem_fun(*this, &Mainwin::on_file_save_click));
+    filemenu->append(*menuitem_save);
 
     //         E A S T E R   E G G
     // (TODO: Test Only) “Create a New Emporium” Append Easter Egg to the File menu
-    Gtk::MenuItem *menuitem_easteregg = Gtk::manage(new Gtk::MenuItem("_Easter Egg", true));
+    menuitem_easteregg = Gtk::manage(new Gtk::MenuItem("_Easter Egg", true));
     menuitem_easteregg->signal_activate().connect(sigc::mem_fun(*this, &Mainwin::on_easteregg_click));
     filemenu->append(*menuitem_easteregg);
 
     //         Q U I T
     // Append Quit to the File menu
-    Gtk::MenuItem *menuitem_quit = Gtk::manage(new Gtk::MenuItem("_Quit", true));
+    menuitem_quit = Gtk::manage(new Gtk::MenuItem("_Quit", true));
     menuitem_quit->signal_activate().connect(sigc::mem_fun(*this, &Mainwin::on_quit_click));
     filemenu->append(*menuitem_quit);
 
@@ -58,27 +70,90 @@ Mainwin::Mainwin() {
 
     //         O R D E R
     // (All) “Create Delicious Ice Cream Treats” Append Order to the Create menu
-    Gtk::MenuItem *menuitem_order = Gtk::manage(new Gtk::MenuItem("_Order...", true));
+    menuitem_order = Gtk::manage(new Gtk::MenuItem("_Order...", true));
     menuitem_order->signal_activate().connect(sigc::mem_fun(*this, &Mainwin::on_create_order_click));
     createmenu->append(*menuitem_order);
 
     //         C U S T O M E R
     // (Server, Manager, Owner) “Create a New Customer” Append Customer to the Create menu
-    Gtk::MenuItem *menuitem_customer = Gtk::manage(new Gtk::MenuItem("_Customer...", true));
-    //menuitem_customer->signal_activate().connect(sigc::mem_fun(*this, &Mainwin::on_create_customer_click));
+    menuitem_customer = Gtk::manage(new Gtk::MenuItem("_Customer...", true));
+    menuitem_customer->signal_activate().connect(sigc::mem_fun(*this, &Mainwin::on_create_customer_click));
     createmenu->append(*menuitem_customer);
 
     //         I T E M 
     // (Owner, Manager) “Create a New Container, Ice Cream Flavor, or Topping” Append Item to the Create menu
-    Gtk::MenuItem *menuitem_item = Gtk::manage(new Gtk::MenuItem("_Item...", true));
+    menuitem_item = Gtk::manage(new Gtk::MenuItem("_Item...", true));
     menuitem_item->signal_activate().connect(sigc::mem_fun(*this, &Mainwin::on_create_item_click));
     createmenu->append(*menuitem_item);
 
     //         S E R V E R
     // (Owner, Manager) “Add a New Employee” Append Server to the Create menu
-    Gtk::MenuItem *menuitem_server = Gtk::manage(new Gtk::MenuItem("_Server...", true));
-    //menuitem_server->signal_activate().connect(sigc::mem_fun(*this, &Mainwin::on_create_server_click));
+    menuitem_server = Gtk::manage(new Gtk::MenuItem("_Server...", true));
+    menuitem_server->signal_activate().connect(sigc::mem_fun(*this, &Mainwin::on_create_server_click));
     createmenu->append(*menuitem_server);
+
+    //
+    //     P R O C E S S
+    // Create a Process menu and add to the menu bar
+    Gtk::MenuItem *menuitem_process = Gtk::manage(new Gtk::MenuItem("_Process", true));
+    menubar->append(*menuitem_process);
+    Gtk::Menu *processmenu = Gtk::manage(new Gtk::Menu());
+    menuitem_process->set_submenu(*processmenu);
+
+    //         F I L L   O R D E R
+    // (Server) “_Fill Order..."
+    Gtk::MenuItem *menuitem_fill_order = Gtk::manage(new Gtk::MenuItem("_Fill Order", true));
+    menuitem_fill_order->signal_activate().connect(sigc::mem_fun(*this, &Mainwin::on_fill_order_click));
+    processmenu->append(*menuitem_fill_order);
+
+    //         P A Y
+    // (All) “_Pay.."
+    menuitem_pay_for_order = Gtk::manage(new Gtk::MenuItem("_Pay for Order", true));
+    menuitem_pay_for_order->signal_activate().connect(sigc::mem_fun(*this, &Mainwin::on_pay_for_order_click));
+    processmenu->append(*menuitem_pay_for_order);
+
+    //         C A N C E L   O R D E R
+    // (Customer, Server) “_Fill Order...", true));
+    menuitem_cancel_order = Gtk::manage(new Gtk::MenuItem("_Cancel Order", true));
+    menuitem_cancel_order->signal_activate().connect(sigc::mem_fun(*this, &Mainwin::on_cancel_order_click));
+    processmenu->append(*menuitem_cancel_order);
+
+    //     R O L E
+    // Create a Role menu and add to the menu bar
+    Gtk::MenuItem *menuitem_role = Gtk::manage(new Gtk::MenuItem("_Role", true));
+    menubar->append(*menuitem_role);
+    Gtk::Menu *rolemenu = Gtk::manage(new Gtk::Menu());
+    menuitem_role->set_submenu(*rolemenu);
+
+    //           A L L
+    // Append All to the Role menu
+    Gtk::MenuItem *menuitem_all_role = Gtk::manage(new Gtk::MenuItem("All", true));
+    menuitem_all_role->signal_activate().connect(sigc::mem_fun(*this, &Mainwin::on_all_click));
+    rolemenu->append(*menuitem_all_role);
+
+    //           O W N E R
+    // Append Owner to the Role menu
+    Gtk::MenuItem *menuitem_owner_role = Gtk::manage(new Gtk::MenuItem("Owner", true));
+    menuitem_owner_role->signal_activate().connect(sigc::mem_fun(*this, &Mainwin::on_owner_click));
+    rolemenu->append(*menuitem_owner_role);
+
+    //           M A N A G E R
+    // Append Manager to the Role menu
+    Gtk::MenuItem *menuitem_manager_role = Gtk::manage(new Gtk::MenuItem("Manager", true));
+    menuitem_manager_role->signal_activate().connect(sigc::mem_fun(*this, &Mainwin::on_manager_click));
+    rolemenu->append(*menuitem_manager_role);
+
+    //           S E R V E R
+    // Append Manager to the Role menu
+    Gtk::MenuItem *menuitem_server_role = Gtk::manage(new Gtk::MenuItem("Server", true));
+    menuitem_server_role->signal_activate().connect(sigc::mem_fun(*this, &Mainwin::on_server_click));
+    rolemenu->append(*menuitem_server_role);
+
+    //           C U S T O M E R
+    // Append Customer to the Role menu
+    Gtk::MenuItem *menuitem_customer_role = Gtk::manage(new Gtk::MenuItem("Customer", true));
+    menuitem_customer_role->signal_activate().connect(sigc::mem_fun(*this, &Mainwin::on_customer_click));
+    rolemenu->append(*menuitem_customer_role);
 
     //     H E L P
     // Create a Help menu and add to the menu bar
@@ -101,15 +176,15 @@ Mainwin::Mainwin() {
 
     //     N E W   E M P O R I U M
     // Add a new emporium icon
-    Gtk::ToolButton *new_emporium_button = Gtk::manage(new Gtk::ToolButton(Gtk::Stock::NEW));
+    new_emporium_button = Gtk::manage(new Gtk::ToolButton(Gtk::Stock::NEW));
     new_emporium_button->set_tooltip_markup("Create a New Emporium");
-    //new_emporium_button->signal_clicked().connect(sigc::mem_fun(*this, &Mainwin::on_new_emporium_click));
+    //new_emporium_button->signal_clicked().connect(sigc::mem_fun(*this, &Mainwin::on_file_new_click));
     toolbar->append(*new_emporium_button);
 
     //     C R E A T E   O R D E R
     // Add a Create Order icon
     Gtk::Image *create_order_button_image = Gtk::manage(new Gtk::Image("new_order.png"));
-    Gtk::ToolButton *create_order_button = Gtk::manage(new Gtk::ToolButton(*create_order_button_image));
+    create_order_button = Gtk::manage(new Gtk::ToolButton(*create_order_button_image));
     create_order_button->set_tooltip_markup("Create a new order");
     create_order_button->signal_clicked().connect(sigc::mem_fun(*this, &Mainwin::on_create_order_click));
     toolbar->append(*create_order_button);
@@ -117,7 +192,7 @@ Mainwin::Mainwin() {
     //     C R E A T E   C R E A T E   I T E M
     // Add a Create Item icon
     Gtk::Image *create_item_button_image = Gtk::manage(new Gtk::Image("create_item.png"));
-    Gtk::ToolButton *create_item_button = Gtk::manage(new Gtk::ToolButton(*create_item_button_image));
+    create_item_button = Gtk::manage(new Gtk::ToolButton(*create_item_button_image));
     create_item_button->set_tooltip_markup("Create a new item");
     create_item_button->signal_clicked().connect(sigc::mem_fun(*this, &Mainwin::on_create_item_click));
     toolbar->append(*create_item_button);
@@ -134,70 +209,112 @@ Mainwin::Mainwin() {
 
     // Make the box and everything in it visible
     vbox->show_all();
+
+    // Start with a default emporium
+    _emp = new Mice::Emporium{"Default"};
+    set_title("Mav's Ice Cream Emporium");
 }
 
 Mainwin::~Mainwin() { }
-
-// /////////////////
-// C A L L B A C K S
-// /////////////////
 
 void Mainwin::on_quit_click() {
     hide();
 }
 
-// void Mainwin::on_about_click() {
-// }
+// Set sensitivities based on role
 
-void Mainwin::on_create_order_click() {
-    try {
-        // Create a new serving (NOT an order yet!)
-        Mice::Serving serving = create_serving();
-        _servings.push_back(serving);
-        std::cout << serving << std::endl;  // TODO: Temporary - replace with confirmation dialog
-    } catch(std::runtime_error e) { // User canceled order
-    }
+void Mainwin::on_all_click() {
+    menuitem_new->set_sensitive(true);
+    menuitem_open->set_sensitive(true);
+    menuitem_save->set_sensitive(true);
+    menuitem_easteregg->set_sensitive(true);
+    menuitem_quit->set_sensitive(true);
+    menuitem_order->set_sensitive(true);
+    menuitem_customer->set_sensitive(true);
+    menuitem_item->set_sensitive(true);
+    menuitem_server->set_sensitive(true);
+    menuitem_fill_order->set_sensitive(true);
+    menuitem_pay_for_order->set_sensitive(true);
+    menuitem_cancel_order->set_sensitive(true);
+
+    new_emporium_button->set_sensitive(menuitem_new->get_sensitive());
+    create_order_button->set_sensitive(menuitem_order->get_sensitive());
+    create_item_button->set_sensitive(menuitem_item->get_sensitive());
 }
 
-void Mainwin::on_easteregg_click() {
-        _containers.push_back(
-            Mice::Container{"Cone", "Crispy airy delight", 0.25, 0.50, 2});
-        _containers.push_back(
-            Mice::Container{"Waffle Cone", "Crunchy wrapped waffle cake", 0.35, 0.75, 3});
-        _scoops.push_back(
-            Mice::Scoop{"Chocolate", "Rich smooth chocolate ice cream", 0.20, 0.50});
-        _scoops.push_back(
-            Mice::Scoop{"Vanilla", "Real vanilla bean ice cream", 0.20, 0.50});
-        _scoops.push_back(
-            Mice::Scoop{"Strawberry", "Chunks of strawberry wrapped in vanilla ice cream", 0.20, 0.50});
-        _toppings.push_back(
-            Mice::Topping{"Cherry", "Classic marichino cherry", 0.1, 0.2, 0});
-        _toppings.push_back(
-            Mice::Topping{"Chocolate Sauce", "Rich thick chocolate", 0.1, 0.25, 0});
-        _toppings.push_back(
-            Mice::Topping{"Whipped Cream", "Real sweet cream whipped to perfection", 0.1, 0.2, 0});
+void Mainwin::on_owner_click() {
+    menuitem_new->set_sensitive(true);
+    menuitem_open->set_sensitive(true);
+    menuitem_save->set_sensitive(true);
+    menuitem_easteregg->set_sensitive(true);
+    menuitem_quit->set_sensitive(true);
+    menuitem_order->set_sensitive(true);
+    menuitem_customer->set_sensitive(true);
+    menuitem_item->set_sensitive(true);
+    menuitem_server->set_sensitive(true);
+    menuitem_fill_order->set_sensitive(true);
+    menuitem_pay_for_order->set_sensitive(true);
+    menuitem_cancel_order->set_sensitive(true);
 
-        // Display acknowledgement
-        Gtk::MessageDialog dialog{*this, "Added 2 containers, 3 scoops, and 3 toppings"};
-        dialog.run();
-        dialog.close();
- } 
-
-void Mainwin::on_about_click() {
-    Gtk::AboutDialog dialog{};
-    dialog.set_transient_for(*this);
-    dialog.set_program_name("Mav's Ice Cream Emporium");
-    auto logo = Gdk::Pixbuf::create_from_file("logo.png");
-    dialog.set_logo(logo);
-    dialog.set_version("Sprint 2");
-    dialog.set_copyright("Copyright 2017");
-    dialog.set_license_type(Gtk::License::LICENSE_GPL_3_0);
-    std::vector< Glib::ustring > authors = {"George F. Rice"};
-    dialog.set_authors(authors);
-    std::vector< Glib::ustring > artists = {"Logo by Schmidsi, https://pixabay.com/en/ice-ice-cream-cone-ice-ball-pink-1429596/",
-                                            "Ice Cream Cone by Patrick Trouvé from the Noun Project, https://thenounproject.com/term/ice-cream-cone/63026/"};
-    dialog.set_artists(artists);
-    dialog.run();
+    new_emporium_button->set_sensitive(menuitem_new->get_sensitive());
+    create_order_button->set_sensitive(menuitem_order->get_sensitive());
+    create_item_button->set_sensitive(menuitem_item->get_sensitive());
 }
 
+void Mainwin::on_manager_click() {
+    menuitem_new->set_sensitive(false);
+    menuitem_open->set_sensitive(true);
+    menuitem_save->set_sensitive(true);
+    menuitem_easteregg->set_sensitive(true);
+    menuitem_quit->set_sensitive(true);
+    menuitem_order->set_sensitive(true);
+    menuitem_customer->set_sensitive(true);
+    menuitem_item->set_sensitive(true);
+    menuitem_server->set_sensitive(true);
+    menuitem_fill_order->set_sensitive(true);
+    menuitem_pay_for_order->set_sensitive(true);
+    menuitem_cancel_order->set_sensitive(true);
+
+    new_emporium_button->set_sensitive(menuitem_new->get_sensitive());
+    create_order_button->set_sensitive(menuitem_order->get_sensitive());
+    create_item_button->set_sensitive(menuitem_item->get_sensitive());
+}
+
+void Mainwin::on_server_click() {
+    menuitem_new->set_sensitive(false);
+    menuitem_open->set_sensitive(false);
+    menuitem_save->set_sensitive(false);
+    menuitem_easteregg->set_sensitive(false);
+    menuitem_quit->set_sensitive(true);
+    menuitem_order->set_sensitive(true);
+    menuitem_customer->set_sensitive(true);
+    menuitem_item->set_sensitive(false);
+    menuitem_server->set_sensitive(false);
+    menuitem_fill_order->set_sensitive(true);
+    menuitem_pay_for_order->set_sensitive(true);
+    menuitem_cancel_order->set_sensitive(true);
+
+    new_emporium_button->set_sensitive(menuitem_new->get_sensitive());
+    create_order_button->set_sensitive(menuitem_order->get_sensitive());
+    create_item_button->set_sensitive(menuitem_item->get_sensitive());
+}
+
+void Mainwin::on_customer_click() {
+    menuitem_new->set_sensitive(false);
+    menuitem_open->set_sensitive(false);
+    menuitem_save->set_sensitive(false);
+    menuitem_easteregg->set_sensitive(false);
+    menuitem_quit->set_sensitive(false);
+    menuitem_order->set_sensitive(true);
+    menuitem_customer->set_sensitive(false);
+    menuitem_item->set_sensitive(false);
+    menuitem_server->set_sensitive(false);
+    menuitem_fill_order->set_sensitive(false);
+    menuitem_pay_for_order->set_sensitive(false);
+    menuitem_cancel_order->set_sensitive(true);
+
+    new_emporium_button->set_sensitive(menuitem_new->get_sensitive());
+    create_order_button->set_sensitive(menuitem_order->get_sensitive());
+    create_item_button->set_sensitive(menuitem_item->get_sensitive());
+}
 

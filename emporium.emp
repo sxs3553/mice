@@ -1,0 +1,341 @@
+MICE
+0.1
+#
+EMPORIUM
+Default
+0
+5
+#
+CONTAINER
+Bowl
+0.25
+0.5
+0
+4
+Depression of Delight
+#
+CONTAINER
+Cone
+0.25
+0.5
+0
+2
+Crispy airy delight
+#
+CONTAINER
+Waffle Cone
+0.35
+0.75
+0
+3
+Crunchy wrapped waffle cake
+#
+SCOOP
+Tutti Frutti
+0.25
+0.75
+0
+Dunno
+#
+SCOOP
+Chocolate
+0.2
+0.5
+0
+Rich smooth chocolate ice cream
+#
+SCOOP
+Vanilla
+0.2
+0.5
+0
+Real vanilla bean ice cream
+#
+SCOOP
+Strawberry
+0.2
+0.5
+0
+Chunks of strawberry wrapped in vanilla ice cream
+#
+TOPPING
+Cherry
+0.1
+0.2
+0
+0
+Classic marichino cherry
+#
+TOPPING
+Chocolate Sauce
+0.1
+0.25
+0
+0
+Rich thick chocolate
+#
+TOPPING
+Whipped Cream
+0.1
+0.2
+0
+0
+Real sweet cream whipped to perfection
+#
+ORDER
+2
+3
+#
+CUSTOMER
+Prof Rice
+1
+1
+#
+SERVER
+Rachel Green
+Friends
+817-555-1213
+8.75
+0
+#
+SERVING
+#
+CONTAINER
+Bowl
+0.25
+0.5
+0
+4
+Depression of Delight
+#
+SCOOP
+Tutti Frutti
+0.25
+0.75
+0
+Dunno
+#
+END SERVING
+#
+END ORDER
+#
+ORDER
+3
+0
+#
+CUSTOMER
+Prof Rice
+1
+1
+#
+SERVER
+TBD
+TBD
+TBD
+0
+0
+#
+SERVING
+#
+CONTAINER
+Bowl
+0.25
+0.5
+0
+4
+Depression of Delight
+#
+SCOOP
+Tutti Frutti
+0.25
+0.75
+0
+Dunno
+#
+END SERVING
+#
+END ORDER
+#
+ORDER
+4
+1
+#
+CUSTOMER
+Elton John
+Glitter
+817-555-1313
+#
+SERVER
+TBD
+TBD
+TBD
+0
+0
+#
+SERVING
+#
+CONTAINER
+Bowl
+0.25
+0.5
+0
+4
+Depression of Delight
+#
+SCOOP
+Chocolate
+0.2
+0.5
+0
+Rich smooth chocolate ice cream
+#
+SCOOP
+Vanilla
+0.2
+0.5
+0
+Real vanilla bean ice cream
+#
+SCOOP
+Strawberry
+0.2
+0.5
+0
+Chunks of strawberry wrapped in vanilla ice cream
+#
+TOPPING
+Chocolate Sauce
+0.1
+0.25
+0
+0
+Rich thick chocolate
+#
+TOPPING
+Cherry
+0.1
+0.2
+0
+0
+Classic marichino cherry
+#
+END SERVING
+#
+END ORDER
+#
+ORDER
+5
+2
+#
+CUSTOMER
+Columbo
+LAPD
+817-555-1312
+#
+SERVER
+Henry Jackson
+BWidowers
+817-555-1214
+15
+0
+#
+SERVING
+#
+CONTAINER
+Cone
+0.25
+0.5
+0
+2
+Crispy airy delight
+#
+SCOOP
+Vanilla
+0.2
+0.5
+0
+Real vanilla bean ice cream
+#
+END SERVING
+#
+SERVING
+#
+CONTAINER
+Waffle Cone
+0.35
+0.75
+0
+3
+Crunchy wrapped waffle cake
+#
+SCOOP
+Tutti Frutti
+0.25
+0.75
+0
+Dunno
+#
+SCOOP
+Vanilla
+0.2
+0.5
+0
+Real vanilla bean ice cream
+#
+TOPPING
+Chocolate Sauce
+0.1
+0.25
+0
+0
+Rich thick chocolate
+#
+TOPPING
+Cherry
+0.1
+0.2
+0
+0
+Classic marichino cherry
+#
+END SERVING
+#
+END ORDER
+#
+SERVER
+Penny
+BBT
+817-555-1212
+10.25
+0
+#
+SERVER
+Rachel Green
+Friends
+817-555-1213
+8.75
+0
+#
+SERVER
+Henry Jackson
+BWidowers
+817-555-1214
+15
+0
+#
+CUSTOMER
+Prof Rice
+1
+1
+#
+CUSTOMER
+Columbo
+LAPD
+817-555-1312
+#
+CUSTOMER
+Elton John
+Glitter
+817-555-1313
+#
+END EMPORIUM

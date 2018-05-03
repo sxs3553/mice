@@ -49,6 +49,44 @@ bool test_scoop() {
     passed = false;
   }
 
+  // Test I/O
+  std::ostringstream ost;
+  scoop.save(ost);
+
+  std::istringstream ist{ost.str()};
+  std::string header1, header2;
+  getline(ist, header1);
+  getline(ist, header2);
+  if (header1 != "#" && header2 != "SCOOP") {
+      std::cerr << "#### Scoop I/O fail" << std::endl;
+      std::cerr << "Expected header: '#' and 'SCOOP'" << std::endl;
+      std::cerr << "Actual header: '" << header1 << "' and '" << header2 << "'" << std::endl;
+  }
+
+  Mice::Scoop clone{ist};
+
+  if (scoop.name() != clone.name() ||
+      scoop.description() != clone.description() ||
+      scoop.cost() != clone.cost() ||
+      scoop.price() != clone.price() ||
+      scoop.type() != clone.type() ||
+      scoop.quantity() != clone.quantity()) {
+    std::cerr << "#### Scoop constructor fail" << std::endl;
+    std::cerr << "Expected:   " << scoop.name() << ','
+                              << scoop.description() << ','
+                              << scoop.cost() << ','
+                              << scoop.price() << ','
+                              << scoop.type() << ','
+                              << scoop.quantity() << std::endl;
+    std::cerr << "Actual: " << clone.name() << ','
+                              << clone.description() << ','
+                              << clone.cost() << ','
+                              << clone.price() << ','
+                              << clone.type() << ','
+                              << clone.quantity() << std::endl;
+    passed = false;
+  }
+
   //
   // Report results
   //

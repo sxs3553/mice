@@ -50,6 +50,44 @@ bool test_container() {
     passed = false;
   }
 
+  // Test I/O
+  std::ostringstream ost;
+  container.save(ost);
+
+  std::istringstream ist{ost.str()};
+  std::string header1, header2;
+  getline(ist, header1);
+  getline(ist, header2);
+  if (header1 != "#" && header2 != "CONTAINER") {
+      std::cerr << "#### Container I/O fail" << std::endl;
+      std::cerr << "Expected header: '#' and 'CONTAINER'" << std::endl;
+      std::cerr << "Actual header: '" << header1 << "' and '" << header2 << "'" << std::endl;
+  }
+
+  Mice::Container clone{ist};
+
+  if (container.name() != clone.name() ||
+    container.description() != clone.description() ||
+    container.cost() != clone.cost() ||
+    container.price() != clone.price() ||
+    container.type() != clone.type() ||
+    container.max_scoops() != clone.max_scoops()) {
+      std::cerr << "#### Container I/O fail" << std::endl;
+      std::cerr << "Expected:   " << container.name() << ','
+                                << container.description() << ','
+                                << container.cost() << ','
+                                << container.price() << ','
+                                << container.type() << ','
+                                << container.max_scoops() << std::endl;
+      std::cerr << "Actual: " << clone.name() << ','
+                              << clone.description() << ','
+                              << clone.cost() << ','
+                              << clone.price() << ','
+                              << clone.type() << ','
+                              << clone.max_scoops() << std::endl;
+      passed = false;
+  }
+
   //
   // Report results
   //
